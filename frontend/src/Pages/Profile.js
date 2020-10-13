@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 import { UserContext } from '../App';
-Axios.defaults.baseURL = 'http://localhost:5000';
+//Axios.defaults.baseURL = 'http://localhost:5000';
 
 const Profile = () => {
 

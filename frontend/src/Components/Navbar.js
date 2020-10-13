@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../App';
 import M from 'materialize-css';
 import Axios from 'axios';
-Axios.defaults.baseURL = 'http://localhost:5000';
+//Axios.defaults.baseURL = 'http://localhost:5000';
 
 const Navbar = () => {
   const history = useHistory();

@@ -2,16 +2,19 @@ import React, { Fragment, useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 import { UserContext } from '../App';
 import { Link } from 'react-router-dom';
+//Axios.defaults.baseURL = 'http://localhost:5000';
 
-Axios.defaults.baseURL = 'http://localhost:5000';
-Axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const { state, dispatch } = useContext(UserContext);
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await Axios.get('/posts');
+      const { data } = await Axios.get('/posts', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      });
       
       setPosts(data.posts);
     }
@@ -26,7 +29,11 @@ const Home = () => {
     } = await Axios.put(
       '/posts/like',
       { postId: id },
-      // headers
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
     );
 
     const updated_posts_after_like = posts.map((post) => {
@@ -46,7 +53,11 @@ const Home = () => {
     } = await Axios.put(
       '/posts/unlike',
       { postId: id },
-      // headers
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
     );
 
     const updated_posts_after_unlike = posts.map((post) => {
@@ -63,8 +74,12 @@ const Home = () => {
   const writeComment = async (text, postId) => {
     const { data: { postCommented } } = await Axios.put(
       '/posts/comment',
-      { text, postId }
-      // headers
+      { text, postId },
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
     );
     
     const updated_posts_after_comment = posts.map((post) => {
