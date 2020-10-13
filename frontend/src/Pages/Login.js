@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Axios from '../Axios';
+import Axios from 'axios';
 import M from 'materialize-css';
 import { UserContext } from '../App';
+Axios.defaults.baseURL = 'http://localhost:5000';
 
 const Login = () => {
   const [email, setEmail] = useState('');

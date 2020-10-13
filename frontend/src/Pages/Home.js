@@ -1,8 +1,10 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import Axios from '../Axios';
+import Axios from 'axios';
 import { UserContext } from '../App';
 import { Link } from 'react-router-dom';
 
+Axios.defaults.baseURL = 'http://localhost:5000';
+Axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const { state, dispatch } = useContext(UserContext);
