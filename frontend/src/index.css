@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.brand-logo {
+  font-family: 'Grand Hotel', cursive;
+}
+
+.signin {
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+input[type=text]:focus {
+  border-bottom: 1px solid #444 !important;
+  box-shadow: 0 1px 0 0 #444  !important;
+}
+input[type=password]:focus {
+  border-bottom: 1px solid #444 !important;
+  box-shadow: 0 1px 0 0 #444 !important;
+}
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.item{
+  width: 30%;
+}
+
+.home-card{
+  max-width: 500px;
+  height: max-content;
+  margin: 26px auto;
+  
+}
+.collection-item{
+  width: 100%;
+}
+
+
+#toast-container{
+  top:50px !important;
+  right: 20px !important;
+  left: auto !important;
+}
+
+
+.material-icons:hover{
+  cursor: pointer;
+}
+
+.submit-upd-photo {
+  position: relative;
+  right: -450px;
+  top: -80px;
+}
