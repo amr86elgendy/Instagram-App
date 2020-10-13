@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Axios from '../Axios';
+import Axios from 'axios';
 import M from 'materialize-css';
+Axios.defaults.baseURL = 'http://localhost:5000';
 
 const Signup = () => {
   const [name, setName] = useState('');

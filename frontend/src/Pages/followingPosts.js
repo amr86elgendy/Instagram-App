@@ -1,7 +1,8 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import Axios from '../Axios';
+import Axios from 'axios';
 import { UserContext } from '../App';
 import { Link } from 'react-router-dom';
+Axios.defaults.baseURL = 'http://localhost:5000';
 
 const FollowingPosts = () => {
   const [posts, setPosts] = useState([]);

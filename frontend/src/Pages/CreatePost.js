@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Axios from '../Axios';
+import Axios from 'axios';
 import M from 'materialize-css';
+Axios.defaults.baseURL = 'http://localhost:5000';
+Axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+
 
 const CreatePost = () => {
   const history = useHistory();
