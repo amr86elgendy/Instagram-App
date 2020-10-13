@@ -28,7 +28,7 @@ const Signup = () => {
         );
         const photo = secure_url;
         const user = { name, email, password, photo };
-        const { data } = await Axios.post('http://localhost:5000/signup', user);
+        const { data } = await Axios.post('/signup', user);
         if (data.error) {
           M.toast({ html: data.error, classes: 'red' });
         } else {
@@ -37,7 +37,7 @@ const Signup = () => {
         }
       } else {
         const user = { name, email, password };
-        const { data } = await Axios.post('http://localhost:5000/signup', user);
+        const { data } = await Axios.post('/signup', user);
         if (data.error) {
           M.toast({ html: data.error, classes: 'red' });
         } else {

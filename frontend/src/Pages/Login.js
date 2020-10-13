@@ -16,7 +16,7 @@ const Login = () => {
     const user = { email, password };
     e.preventDefault();
     try {
-      const { data } = await Axios.post('http://localhost:5000/signin', user);
+      const { data } = await Axios.post('/signin', user);
       if (data.error) {
         M.toast({ html: data.error, classes: 'red' });
       } else {

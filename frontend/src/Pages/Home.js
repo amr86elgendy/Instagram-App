@@ -9,7 +9,7 @@ const Home = () => {
 console.log(posts);
   useEffect(() => {
     async function fetchData() {
-      const { data } = await Axios.get('http://localhost:5000/posts', {
+      const { data } = await Axios.get('/posts', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
@@ -26,7 +26,7 @@ console.log(posts);
     const {
       data: { postLiked },
     } = await Axios.put(
-      'http://localhost:5000/posts/like',
+      '/posts/like',
       { postId: id },
       {
         headers: {
@@ -50,7 +50,7 @@ console.log(posts);
     const {
       data: { postLiked },
     } = await Axios.put(
-      'http://localhost:5000/posts/unlike',
+      '/posts/unlike',
       { postId: id },
       {
         headers: {
@@ -72,7 +72,7 @@ console.log(posts);
   // Write Comment
   const writeComment = async (text, postId) => {
     const { data: { postCommented } } = await Axios.put(
-      'http://localhost:5000/posts/comment',
+      '/posts/comment',
       { text, postId },
       {
         headers: {
@@ -92,7 +92,7 @@ console.log(posts);
   }
 
   const deletePost = async (postId) => {
-    const { data: {deletedPost} } = await Axios.delete(`http://localhost:5000/posts/delete/${postId}`,
+    const { data: {deletedPost} } = await Axios.delete(`/posts/delete/${postId}`,
     {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -115,7 +115,6 @@ console.log(posts);
             photo,
             postedBy,
           } = post;
-          console.log(comments);
           return (
             <div className='card home-card' key={_id}>
               <h5 style={{padding: '5px'}}><Link to={postedBy._id !== state._id ? `/profile/${postedBy._id}` : `/profile`}>{postedBy.name}</Link> {postedBy._id === state._id && <i className='material-icons right red-text' onClick={() => deletePost(_id)}>delete</i>}</h5>

@@ -18,7 +18,7 @@ const OtherProfile = () => {
     async function fetchData() {
       const {
         data: { user, userPosts },
-      } = await Axios.get(`http://localhost:5000/user/${userId}`, {
+      } = await Axios.get(`/user/${userId}`, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
@@ -32,7 +32,7 @@ const OtherProfile = () => {
   }, []);
 
   const followUser = async () => {
-    const { data: {userFollowed, userFollower} } = await Axios.put('http://localhost:5000/user/follow', {id: userId}, {
+    const { data: {userFollowed, userFollower} } = await Axios.put('/user/follow', {id: userId}, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
@@ -45,7 +45,7 @@ const OtherProfile = () => {
   };
 
   const unfollowUser = async () => {
-    const { data: {userFollowed, userFollower} } = await Axios.put('http://localhost:5000/user/unfollow', {id: userId}, {
+    const { data: {userFollowed, userFollower} } = await Axios.put('/user/unfollow', {id: userId}, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },

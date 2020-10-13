@@ -9,12 +9,15 @@ const FollowingPosts = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await Axios.get('http://localhost:5000/posts/following', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      });
-      
+      const { data } = await Axios.get(
+        '/posts/following',
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+        }
+      );
+
       setPosts(data.posts);
     }
     fetchData();
@@ -26,7 +29,7 @@ const FollowingPosts = () => {
     const {
       data: { postLiked },
     } = await Axios.put(
-      'http://localhost:5000/posts/like',
+      '/posts/like',
       { postId: id },
       {
         headers: {
@@ -50,7 +53,7 @@ const FollowingPosts = () => {
     const {
       data: { postLiked },
     } = await Axios.put(
-      'http://localhost:5000/posts/unlike',
+      '/posts/unlike',
       { postId: id },
       {
         headers: {
@@ -71,8 +74,10 @@ const FollowingPosts = () => {
 
   // Write Comment
   const writeComment = async (text, postId) => {
-    const { data: { postCommented } } = await Axios.put(
-      'http://localhost:5000/posts/comment',
+    const {
+      data: { postCommented },
+    } = await Axios.put(
+      '/posts/comment',
       { text, postId },
       {
         headers: {
@@ -80,7 +85,7 @@ const FollowingPosts = () => {
         },
       }
     );
-    
+
     const updated_posts_after_comment = posts.map((post) => {
       if (post._id == postCommented._id) {
         return postCommented;
@@ -89,35 +94,48 @@ const FollowingPosts = () => {
       }
     });
     setPosts(updated_posts_after_comment);
-  }
+  };
 
   const deletePost = async (postId) => {
-    const { data: {deletedPost} } = await Axios.delete(`http://localhost:5000/posts/delete/${postId}`,
-    {
+    const {
+      data: { deletedPost },
+    } = await Axios.delete(`/posts/delete/${postId}`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     });
-    const updated_posts_after_delete = posts.filter(post => post._id !== deletedPost._id);
-    setPosts(updated_posts_after_delete)
-  }
+    const updated_posts_after_delete = posts.filter(
+      (post) => post._id !== deletedPost._id
+    );
+    setPosts(updated_posts_after_delete);
+  };
 
   return (
     <Fragment>
       {posts &&
         posts.map((post) => {
-          const {
-            _id,
-            likes,
-            comments,
-            title,
-            body,
-            photo,
-            postedBy,
-          } = post;
+          const { _id, likes, comments, title, body, photo, postedBy } = post;
           return (
             <div className='card home-card' key={_id}>
-              <h5 style={{padding: '5px'}}><Link to={postedBy._id !== state._id ? `/profile/${postedBy._id}` : `/profile`}>{postedBy.name}</Link> {postedBy._id === state._id && <i className='material-icons right red-text' onClick={() => deletePost(_id)}>delete</i>}</h5>
+              <h5 style={{ padding: '5px' }}>
+                <Link
+                  to={
+                    postedBy._id !== state._id
+                      ? `/profile/${postedBy._id}`
+                      : `/profile`
+                  }
+                >
+                  {postedBy.name}
+                </Link>{' '}
+                {postedBy._id === state._id && (
+                  <i
+                    className='material-icons right red-text'
+                    onClick={() => deletePost(_id)}
+                  >
+                    delete
+                  </i>
+                )}
+              </h5>
               <div className='card-image'>
                 <img src={photo} alt={postedBy.name} />
               </div>
@@ -137,15 +155,22 @@ const FollowingPosts = () => {
                 <h6>{likes.length} likes</h6>
                 <h6>{title}</h6>
                 <p>{body}</p>
-                {comments.map(comment => {
+                {comments.map((comment) => {
                   return (
-                    <h5 key={comment._id}><span style={{fontWeight: '500'}}>{comment.postedBy.name}: </span>{comment.text}</h5>
-                  )
+                    <h5 key={comment._id}>
+                      <span style={{ fontWeight: '500' }}>
+                        {comment.postedBy.name}:{' '}
+                      </span>
+                      {comment.text}
+                    </h5>
+                  );
                 })}
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                  writeComment(e.target[0].value, _id)
-                  }}>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    writeComment(e.target[0].value, _id);
+                  }}
+                >
                   <input type='text' placeholder='Add a Comment' />
                 </form>
               </div>

@@ -3,8 +3,17 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config/keys');
-const requireLogin = require('../middleware/requireLogin');
 const router = express.Router();
+// const nodemailer = require('nodemailer')
+// const sendgridTransport = require('nodemailer-sendgrid-transport')
+// const transporter = nodemailer.createTransport(
+//   sendgridTransport({
+//     auth: {
+//       api_key:
+//         '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',
+//     },
+//   })
+// );
 
 // SignUp Route
 router.post('/signup', async (req, res) => {
@@ -20,6 +29,7 @@ router.post('/signup', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({ name, email, password: hashedPassword, photo });
     const newUser = await user.save();
+    
     res.json({ msg: 'Registered successfully' });
   } catch (error) {
     console.log(error);

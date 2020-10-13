@@ -94,4 +94,16 @@ router.put('/updatephoto', requireLogin, async (req, res) => {
   }
 });
 
+// Search Users
+router.post('/search', requireLogin, async (req, res) => {
+  let userPattern = new RegExp(`^${req.body.query}`);
+  try {
+    const users = await User.find({email: {$regex: userPattern}}).select('_id name email');
+    res.json({ users })
+  } catch (error) {
+    console.log(error);
+    return res.status(422).json({ error: error.message });
+  }
+})
+
 module.exports = router;

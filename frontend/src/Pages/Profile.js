@@ -10,7 +10,7 @@ const Profile = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await Axios.get('http://localhost:5000/posts/me', {headers: {
+      const { data } = await Axios.get('/posts/me', {headers: {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     }});
     setMyPosts(data.myPosts);
@@ -33,7 +33,7 @@ const Profile = () => {
       form
     );
     const photo = secure_url;
-    const { data: {user} } = await Axios.put('http://localhost:5000/user/updatephoto', {photo}, {
+    const { data: {user} } = await Axios.put('/user/updatephoto', {photo}, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },

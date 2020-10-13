@@ -25,7 +25,7 @@ const CreatePost = () => {
       );
       const photo = secure_url;
       const post = { title, body, photo };
-      const { data } = await Axios.post('http://localhost:5000/posts/create',
+      const { data } = await Axios.post('/posts/create',
         post,
         {
           headers: {
