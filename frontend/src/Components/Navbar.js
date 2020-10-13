@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../App';
 import M from 'materialize-css';
-import Axios from 'axios';
+import Axios from '../Axios';
 
 const Navbar = () => {
   const history = useHistory();

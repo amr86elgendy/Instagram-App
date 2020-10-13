@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import Axios from 'axios';
+import Axios from '../Axios';
 import { UserContext } from '../App';
 import { Link } from 'react-router-dom';
 
@@ -39,7 +39,7 @@ const FollowingPosts = () => {
     );
 
     const updated_posts_after_like = posts.map((post) => {
-      if (post._id == postLiked._id) {
+      if (post._id === postLiked._id) {
         return postLiked;
       } else {
         return post;
@@ -63,7 +63,7 @@ const FollowingPosts = () => {
     );
 
     const updated_posts_after_unlike = posts.map((post) => {
-      if (post._id == postLiked._id) {
+      if (post._id === postLiked._id) {
         return postLiked;
       } else {
         return post;
@@ -87,7 +87,7 @@ const FollowingPosts = () => {
     );
 
     const updated_posts_after_comment = posts.map((post) => {
-      if (post._id == postCommented._id) {
+      if (post._id === postCommented._id) {
         return postCommented;
       } else {
         return post;

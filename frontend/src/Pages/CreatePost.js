@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Axios from 'axios';
+import Axios from '../Axios';
 import M from 'materialize-css';
 
 const CreatePost = () => {

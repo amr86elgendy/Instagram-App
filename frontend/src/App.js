@@ -17,7 +17,7 @@ function App() {
   const history = useHistory();
   const [state, dispatch] = useReducer(userReducer, initState)
   useEffect(() => {
-    console.log('app render');
+    
     const user = JSON.parse(localStorage.getItem('userInfo'));
     if (user) {
       dispatch({ type: 'USER', payload: user });

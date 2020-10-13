@@ -1,19 +1,15 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import Axios from 'axios';
+import Axios from '../Axios';
 import { UserContext } from '../App';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const { state, dispatch } = useContext(UserContext);
-console.log(posts);
+
   useEffect(() => {
     async function fetchData() {
-      const { data } = await Axios.get('/posts', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      });
+      const { data } = await Axios.get('/posts');
       
       setPosts(data.posts);
     }
@@ -28,15 +24,11 @@ console.log(posts);
     } = await Axios.put(
       '/posts/like',
       { postId: id },
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      }
+      // headers
     );
 
     const updated_posts_after_like = posts.map((post) => {
-      if (post._id == postLiked._id) {
+      if (post._id === postLiked._id) {
         return postLiked;
       } else {
         return post;
@@ -52,15 +44,11 @@ console.log(posts);
     } = await Axios.put(
       '/posts/unlike',
       { postId: id },
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      }
+      // headers
     );
 
     const updated_posts_after_unlike = posts.map((post) => {
-      if (post._id == postLiked._id) {
+      if (post._id === postLiked._id) {
         return postLiked;
       } else {
         return post;
@@ -73,16 +61,12 @@ console.log(posts);
   const writeComment = async (text, postId) => {
     const { data: { postCommented } } = await Axios.put(
       '/posts/comment',
-      { text, postId },
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      }
+      { text, postId }
+      // headers
     );
     
     const updated_posts_after_comment = posts.map((post) => {
-      if (post._id == postCommented._id) {
+      if (post._id === postCommented._id) {
         return postCommented;
       } else {
         return post;
@@ -93,11 +77,8 @@ console.log(posts);
 
   const deletePost = async (postId) => {
     const { data: {deletedPost} } = await Axios.delete(`/posts/delete/${postId}`,
-    {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    });
+    // headers
+    );
     const updated_posts_after_delete = posts.filter(post => post._id !== deletedPost._id);
     setPosts(updated_posts_after_delete)
   }
@@ -130,7 +111,7 @@ console.log(posts);
                     thumb_down
                   </i>
                 ) : (
-                  <i className='material-icons' onClick={() => likePost(_id)}>
+                  <i className='material-icons blue-text' onClick={() => likePost(_id)}>
                     thumb_up
                   </i>
                 )}
@@ -144,7 +125,8 @@ console.log(posts);
                 })}
                 <form onSubmit={(e) => {
                   e.preventDefault();
-                  writeComment(e.target[0].value, _id)
+                  writeComment(e.target[0].value, _id);
+                  e.target[0].value = '';
                   }}>
                   <input type='text' placeholder='Add a Comment' />
                 </form>

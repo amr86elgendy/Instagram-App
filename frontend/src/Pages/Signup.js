@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Axios from 'axios';
+import Axios from '../Axios';
 import M from 'materialize-css';
 
 const Signup = () => {
