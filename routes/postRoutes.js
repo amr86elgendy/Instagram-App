@@ -1,7 +1,5 @@
 const express = require('express');
 const Post = require('../models/Post');
-// const jwt = require('jsonwebtoken');
-// const { JWT_SECRET } = require('../keys');
 const requireLogin = require('../middleware/requireLogin');
 const router = express.Router();
 
@@ -36,7 +34,7 @@ router.get('/following', requireLogin, async (req, res) => {
 // Create Posts
 router.post('/create', requireLogin, async (req, res) => {
   const { title, body, photo } = req.body;
-  console.log(req.body);
+  
   if (!title || !body || !photo) {
     return res.status(422).json({ error: 'Plase add all the fields' });
   }

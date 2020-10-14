@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 import { UserContext } from '../App';
 import { useParams } from 'react-router-dom';
-//Axios.defaults.baseURL = 'http://localhost:5000';
+// Axios.defaults.baseURL = 'http://localhost:5000';
 
 const OtherProfile = () => {
   
@@ -13,9 +13,10 @@ const OtherProfile = () => {
 
   const { userId } = useParams();
   const [showFollow, setShowFollow] = useState(state ? !state.following.includes(userId) : true);
-  
+
 
   useEffect(() => {
+    
     async function fetchData() {
       const {
         data: { user, userPosts },
@@ -30,7 +31,7 @@ const OtherProfile = () => {
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userId]); // to render every time params changes
 
   const followUser = async () => {
     const { data: {userFollowed, userFollower} } = await Axios.put('/user/follow', {id: userId}, {
