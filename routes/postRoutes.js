@@ -73,7 +73,7 @@ router.put('/like', requireLogin, async (req, res) => {
         $push: { likes: _id },
       },
       { new: true }
-    ).populate('comments.postedBy', '_id name');
+    ).populate('postedBy', '_id name').populate('comments.postedBy', '_id name');
     return res.json({ postLiked });
   } catch (error) {
     console.log(error);
@@ -92,7 +92,7 @@ router.put('/unlike', requireLogin, async (req, res) => {
         $pull: { likes: _id },
       },
       { new: true }
-    ).populate('comments.postedBy', '_id name');
+    ).populate('postedBy', '_id name').populate('comments.postedBy', '_id name');
     return res.json({ postLiked });
   } catch (error) {
     console.log(error);

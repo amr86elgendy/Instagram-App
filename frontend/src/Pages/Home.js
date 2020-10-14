@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 import { UserContext } from '../App';
 import { Link } from 'react-router-dom';
-// Axios.defaults.baseURL = 'http://localhost:5000';
+Axios.defaults.baseURL = 'http://localhost:5000';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
